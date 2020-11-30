@@ -49,7 +49,7 @@ foreach ((String Label, Object Value) relation in relations.ToArray())
 </p>
 
 <p>
-    Something similar is also possible with template parameters. But in such a case the template 
+    Something similar is also possible with template parameters. But in such a case the template
     parameter label is used instead, as the next example demonstrates.
 </p>
 
@@ -71,6 +71,12 @@ foreach ((String Label, Object Value) relation in relations.ToArray())
 * index: 111
 * user: John Doe
 * price: 333.33</code></pre>
+
+<p>
+    Just a final note about argument processing. The &ldquo;overhanging&rdquo; arguments are not returned
+    in the result, if the number of objects in the argument array is greater than the number of elements
+    referenced by the format string.
+</p>
 
 
 <p style="margin-bottom: 2em;">&nbsp;</p>
