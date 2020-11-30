@@ -1,0 +1,41 @@
+﻿
+<h2 id="examples-culture-support">Culture Support</h2>
+
+<p>
+    The usage of a specific culture is also possible and can be done by using parameter <samp>provider</samp>.
+</p>
+
+<p>
+    For the following example consider the usage of German culture.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('culture-support-example-1');return false;">Copy</a></div>
+<pre id="culture-support-example-1"><code>Decimal price = 123456.789M;
+DateTime date = DateTime.Parse("2020-10-29T23:05:17.123");
+CultureInfo culture = CultureInfo.CreateSpecificCulture("de-DE");
+Template.Format(culture, "Price: {price:C2} Date: {date:dddd, dd. MMMM yyyy}", price, date);</code></pre>
+
+<p>
+    The result would look like <samp>"Price: 123.456,79 € Date: Donnerstag, 29. Oktober 2020"</samp>.
+</p>
+
+<p>
+    In contrast to the above, consider the usage of US culture.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('culture-support-example-2');return false;">Copy</a></div>
+<pre id="culture-support-example-2"><code>Decimal price = 123456.789M;
+DateTime date = DateTime.Parse("2020-10-29T23:05:17.123");
+CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+Template.Format(culture, "Price: {price:C2} Date: {date:dddd, dd. MMMM yyyy}", price, date);</code></pre>
+
+<p>
+    The result would look like <samp>"Price: $123,456.79 Date: Thursday, 29. October 2020"</samp>.
+</p>
+
+<p>
+    Please note, the format string is unchanged in both cases but the output differs.
+</p>
+
+
+<p style="margin-bottom: 2em;">&nbsp;</p>

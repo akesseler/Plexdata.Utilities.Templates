@@ -1,0 +1,33 @@
+﻿
+<h2 id="examples-format-escaping">Format Escaping</h2>
+
+<p>
+    Sometimes it might be useful to have curly braces within the formatted result. For this purpose
+    the usage of two curly braces is recommended, which causes the formatter to take the content
+    as it is.
+</p>
+
+<p>
+    Here an example for an index&ndash;based formatting with system types but with escaped content.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('index-based-escaped-example-1');return false;">Copy</a></div>
+<pre id="index-based-escaped-example-1"><code>Template.Format("text {1} text {{escaped}} text {2}", 111, "ABC", 333.33);</code></pre>
+
+<p>
+    The result would look like <samp>"text ABC text {escaped} text 333.33"</samp>.
+</p>
+
+<p>
+    The same example as above but for label&ndash;based formatting.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('label-based-escaped-example-1');return false;">Copy</a></div>
+<pre id="label-based-escaped-example-1"><code>Template.Format("text {ValA} text {{escaped}} text {ValC}", 111, "ABC", 333.33);</code></pre>
+
+<p>
+    The result would look like <samp>"text 111 text {escaped} text ABC"</samp>.
+</p>
+
+
+<p style="margin-bottom: 2em;">&nbsp;</p>

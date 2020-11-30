@@ -1,0 +1,69 @@
+﻿
+<h2 id="examples-alignment-usage">Alignment Usage</h2>
+
+<p>
+    This section provides some alignment examples. <em>Alignment</em> means in this case that
+    additional value alignment instructions are used as well. The alignment itself is separated
+    by comma and is followed by the total character width. A negative value means &ldquo;left
+    justified&rdquo; and a positive value means &ldquo;right justified&rdquo;. But not a plus
+    sign <samp>'+'</samp> for a positive value is not allowed.
+</p>
+
+<h3 id="examples-alignment-usage-index-based">Index&ndash;based Formatting</h3>
+
+<p>
+    This example shows an index&ndash;based formatting with system types as well as with value
+    alignment.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('alignment-index-based-example-1');return false;">Copy</a></div>
+<pre id="alignment-index-based-example-1"><code>Template.Format("left [{1,-20}] right [{0,20}]", 111111, 222222);</code></pre>
+
+<p>
+    The result would look like <samp>"left [222222              ] right [              111111]"</samp>.
+</p>
+
+<p>
+    This example shows an index&ndash;based formatting with system types as well as with value
+    alignment and with format instructions.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('alignment-index-based-example-2');return false;">Copy</a></div>
+<pre id="alignment-index-based-example-2"><code>Template.Format("left [{1,-20:N2}] right [{0,20:C3}]", 111111, 222222);</code></pre>
+
+<p>
+    The result would look like <samp>"left [222,222.00          ] right [        $111,111.000]"</samp>.
+</p>
+
+<h3 id="examples-alignment-usage-label-based">Label&ndash;based Formatting</h3>
+
+<p>
+    This example shows a label&ndash;based formatting with system types as well as with value
+    alignment.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('alignment-label-based-example-1');return false;">Copy</a></div>
+<pre id="alignment-label-based-example-1"><code>Template.Format("left [{ValA,-20}] right [{ValB,20}]", 111111, 222222);</code></pre>
+
+<p>
+    The result would look like <samp>"left [111111              ] right [              222222]"</samp>.
+    This is pretty much the same result as for its index&ndash;based counterpart except that the
+    argument order is different.
+</p>
+
+<p>
+    This example shows a label&ndash;based formatting with system types as well as with value
+    alignment and with format instructions.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('alignment-label-based-example-2');return false;">Copy</a></div>
+<pre id="alignment-label-based-example-2"><code>Template.Format("left [{ValA,-20:N2}] right [{ValB,20:C3}]", 111111, 222222);</code></pre>
+
+<p>
+    The result would look like <samp>"left [111,111.00          ] right [        $222,222.000]"</samp>.
+    This is pretty much the same result as for its index&ndash;based counterpart except that the
+    argument order is different.
+</p>
+
+
+<p style="margin-bottom: 2em;">&nbsp;</p>

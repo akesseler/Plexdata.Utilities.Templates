@@ -1,0 +1,145 @@
+
+<h2 id="examples-simple-formatting">Simple Formatting</h2>
+
+<p>
+    This section provides really simple examples. In other words, only the basics of the
+    formatting are shown, but with the aim of getting a first impression.
+</p>
+
+<h3 id="examples-simple-formatting-index-based">Index&ndash;based Formatting</h3>
+
+<p>
+    This example shows an index&ndash;based formatting with system types.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('simple-index-based-example-1');return false;">Copy</a></div>
+<pre id="simple-index-based-example-1"><code>Template.Format("text {1} text {0} text {2}", 111, "ABC", 333.33);</code></pre>
+
+<p>
+    The result would look like <samp>"text ABC text 111 text 333.33"</samp>.
+</p>
+
+<p>
+    This example shows the same as above but with one missing argument.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('simple-index-based-example-2');return false;">Copy</a></div>
+<pre id="simple-index-based-example-2"><code>Template.Format("text {1} text {0} text {2}", 111, "ABC");</code></pre>
+
+<p>
+    The result would look like <samp>"text ABC text 111 text {2}"</samp>. Please note, in such
+    a case the whole formatting instruction is inserted instead of some value. See section
+    <a href="#" onclick="showContent('examples-fallback-usage', './examples/fallback-usage.html');return false;">Fallback Usage</a>
+    for an example of how to avoid this.
+</p>
+
+<p>
+    This example shows a special feature, an index&ndash;based formatting with system types and an inline argument array.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('simple-index-based-example-3');return false;">Copy</a></div>
+<pre id="simple-index-based-example-3"><code>Template.Format("text {1} text {0} text {2} text {3} text {2}", "ABC", new[] { 111, 222, 333 });</code></pre>
+
+<p>
+    The result would look like <samp>"text 111 text ABC text 222 text 333 text 222"</samp>.
+</p>
+
+<p>
+    This example shows an index&ndash;based formatting with system types as well as with stringification.
+    In other words, the operator <samp>'$'</samp> is used together with argument indices.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('simple-index-based-example-4');return false;">Copy</a></div>
+<pre id="simple-index-based-example-4"><code>Template.Format("text {$1} text {$0} text {$2}", 111, "ABC", 333.33);</code></pre>
+
+<p>
+    The result would look like <samp>"text ABC text 111 text 333.33"</samp>. For sure, stringification
+    does not really make sense for system types. But it is interesting for complex data types, because
+    of any formatting is skipped and <samp>ToString()</samp> is called instead.
+</p>
+
+<p>
+    This example shows an index&ndash;based formatting with system types as well as with serialization.
+    In other words, the operator <samp>'@'</samp> is used together with argument indices.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('simple-index-based-example-5');return false;">Copy</a></div>
+<pre id="simple-index-based-example-5"><code>Template.Format("text {@1} text {@0} text {@2}", 111, "ABC", 333.33);</code></pre>
+
+<p>
+    The result would look like <samp>"text ABC text 111 text 333.33"</samp>. For sure, serialization
+    does not really make sense for system types. But it is interesting for complex data types, because
+    of any formatting is skipped and the serializer (custom or build&ndash;in) is called instead.
+</p>
+
+<h3 id="examples-simple-formatting-label-based">Label&ndash;based Formatting</h3>
+
+<p>
+    This example shows a label&ndash;based formatting with system types.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('simple-label-based-example-1');return false;">Copy</a></div>
+<pre id="simple-label-based-example-1"><code>Template.Format("text {ValA} text {ValB} text {ValC}", 111, "ABC", 333.33);</code></pre>
+
+<p>
+    The result would look like <samp>"text 111 text ABC text 333.33"</samp>. This is pretty much
+    the same result as for its index&ndash;based counterpart except that the argument order is
+    different. Keep in mind, label&ndash;based formatting always resolves the arguments from left
+    to right.
+</p>
+
+<p>
+    This example shows the same as above but with one missing argument.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('simple-label-based-example-2');return false;">Copy</a></div>
+<pre id="simple-label-based-example-2"><code>Template.Format("text {ValA} text {ValB} text {ValC}", 111, "ABC");</code></pre>
+
+<p>
+    The result would look like <samp>"text 111 text ABC text {ValC}"</samp>. Please note, in such
+    a case the whole formatting instruction is inserted instead of some value. See section
+    <a href="#" onclick="showContent('examples-fallback-usage', './examples/fallback-usage.html');return false;">Fallback Usage</a>
+    for an example of how to avoid this.
+</p>
+
+<p>
+    This example shows a special feature, a label&ndash;based formatting with system types and an inline argument array.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('simple-label-based-example-3');return false;">Copy</a></div>
+<pre id="simple-label-based-example-3"><code>Template.Format("text {ValA} text {ValB} text {ValC} text {ValD}", "ABC", new[] { 111, 222, 333 });</code></pre>
+
+<p>
+    The result would look like <samp>"text ABC text 111 text 222 text 333"</samp>.
+</p>
+
+<p>
+    This example shows a label&ndash;based formatting with system types as well as with stringification.
+    In other words, the operator <samp>'$'</samp> is used together with template labels.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('simple-label-based-example-4');return false;">Copy</a></div>
+<pre id="simple-label-based-example-4"><code>Template.Format("text {$ValA} text {$ValB} text {$ValC}", 111, "ABC", 333.33);</code></pre>
+
+<p>
+    The result would look like <samp>"text 111 text ABC text 333.33"</samp>. For sure, stringification
+    does not really make sense for system types. But it is interesting for complex data types, because
+    of any formatting is skipped and <samp>ToString()</samp> is called instead.
+</p>
+
+<p>
+    This example shows a label&ndash;based formatting with system types as well as with serialization.
+    In other words, the operator <samp>'@'</samp> is used together with template labels.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('simple-label-based-example-5');return false;">Copy</a></div>
+<pre id="simple-label-based-example-5"><code>Template.Format("text {@ValA} text {@ValB} text {@Valc}", 111, "ABC", 333.33);</code></pre>
+
+<p>
+    The result would look like <samp>"text 111 text ABC text 333.33"</samp>. For sure, serialization
+    does not really make sense for system types. But it is interesting for complex data types, because
+    of any formatting is skipped and the serializer (custom or build&ndash;in) is called instead.
+</p>
+
+
+<p style="margin-bottom: 2em;">&nbsp;</p>

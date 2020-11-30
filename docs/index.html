@@ -1,10 +1,59 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<title>Plexdata Template Formatter</title>
-<meta charset="utf-8">
+
+    <title>Plexdata Template Formatter</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="scripts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            setCopyright('copyright');
+            showContent('overview', 'overview.html');
+        });
+    </script>
 </head>
 <body>
-<p>coming soon...</p>
+
+    <div id="navigation" class="navbar">
+        <a id="overview" href="#" onclick="showContent(this, 'overview.html');return false;">Overview</a>
+        <a id="licensing" class="navsub" href="#" onclick="showContent(this, 'licensing.html');return false;">Licensing</a>
+        <a id="installation" href="#" onclick="showContent(this, 'installation.html');return false;">Installation</a>
+        <a id="options" href="#" onclick="showContent(this, 'options.html');return false;">Options</a>
+        <a id="examples" href="#" onclick="showContent(this, 'examples.html');return false;">Examples</a>
+        <a id="examples-simple-formatting" class="navsub" href="#" onclick="showContent(this, './examples/simple-formatting.html');return false;">Simple Formatting</a>
+        <a id="examples-extended-formatting" class="navsub" href="#" onclick="showContent(this, './examples/extended-formatting.html');return false;">Extended Formatting</a>
+        <a id="examples-format-escaping" class="navsub" href="#" onclick="showContent(this, './examples/format-escaping.html');return false;">Format Escaping</a>
+        <a id="examples-mixed-formatting" class="navsub" href="#" onclick="showContent(this, './examples/mixed-formatting.html');return false;">Mixed Formatting</a>
+        <a id="examples-alignment-usage" class="navsub" href="#" onclick="showContent(this, './examples/alignment-usage.html');return false;">Alignment Usage</a>
+        <a id="examples-culture-support" class="navsub" href="#" onclick="showContent(this, './examples/culture-support.html');return false;">Culture Support</a>
+        <a id="examples-length-truncation" class="navsub" href="#" onclick="showContent(this, './examples/length-truncation.html');return false;">Length Truncation</a>
+        <a id="examples-fallback-usage" class="navsub" href="#" onclick="showContent(this, './examples/fallback-usage.html');return false;">Fallback Usage</a>
+        <a id="examples-custom-serialization" class="navsub" href="#" onclick="showContent(this, './examples/custom-serialization.html');return false;">Custom Serialization</a>
+        <a id="examples-relations-usage" class="navsub" href="#" onclick="showContent(this, './examples/relations-usage.html');return false;">Relations Usage</a>
+        <a id="examples-exception-handling" class="navsub" href="#" onclick="showContent(this, './examples/exception-handling.html');return false;">Exception Handling</a>
+        <a id="limitations" href="#" onclick="showContent(this, 'limitations.html');return false;">Limitations</a>
+    </div>
+
+    <div class="header">
+        <h1>Plexdata Template Formatter</h1>
+    </div>
+
+    <div id="ground">
+        <div id="content" class="content" onscroll="onScrollContent();"></div>
+        <button class="jump-top-button" onclick="onJumpTop();return false;">
+            <i class="fa fa-chevron-up"></i>
+        </button>
+    </div>
+
+    <div id="copyright" class="copyright footer"></div>
+
 </body>
 </html>
