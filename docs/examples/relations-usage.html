@@ -1,0 +1,76 @@
+﻿
+<h2 id="examples-relations-usage">Relations Usage</h2>
+
+<p>
+    Relations as well as obtaining them is a very special feature. Usually, this functionality not
+    of interest of standard template formatting. This is because of it has been designed especially
+    to be used together with logging libraries. Most of these logging libraries provide a parameter for
+    additional logging information that almost always consist of a list of label&ndash;value&ndash;pairs.
+    And this is exactly what this feature wants to support.
+</p>
+
+<p>
+    In detail, <em>Relations</em> means the relation between arguments and their occurrence inside the
+    format string. And as already mentioned, this feature is reserved for a very specific use case,
+    formatting of logging messages. But anyway, users may take advantage of this feature for any other
+    purpose. Furthermore, this feature works for index&ndash;based as well as for label&ndash;based
+    formatting instructions. But keep in mind, the name <samp>"Value"</samp> is prepended in case of
+    index&ndash;based formatting instructions.
+</p>
+
+<p>
+    The example below shows how to obtain argument relations as well as how to process them.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('relations-usage-example-1');return false;">Copy</a></div>
+<pre id="relations-usage-example-1"><code>IArgumentRelations relations;
+String result = Template.Format(out relations, "text {1} text {0} text {2} text {1}", 111, "John Doe", 333.33);
+
+Console.WriteLine(result);
+foreach ((String Label, Object Value) relation in relations.ToArray())
+{
+    Console.WriteLine($"* {relation.Label}: {relation.Value}");
+}</code></pre>
+
+<p>
+    The result printed out to the <em>Console</em> window would look like as shown here.
+</p>
+
+<pre style="background-color: black; color: lightgray;"><code>text John Doe text 111 text 333.33 text John Doe
+* Value1: John Doe
+* Value0: 111
+* Value2: 333.33</code></pre>
+
+
+<p>
+    As already stated, each label is prepended by name <samp>"Value"</samp> and is followed by
+    the index of its occurrence within the format string. But this applies to index&ndash;based
+    formatting only. Furthermore, redundant label&ndash;value&ndash;pairs are avoided.
+</p>
+
+<p>
+    Something similar is also possible with template parameters. But in such a case the template 
+    parameter label is used instead, as the next example demonstrates.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('relations-usage-example-3');return false;">Copy</a></div>
+<pre id="relations-usage-example-3"><code>IArgumentRelations relations;
+String result = Template.Format(out relations, "text {index} text {user} text {price}", 111, "John Doe", 333.33);
+
+Console.WriteLine(result);
+foreach ((String Label, Object Value) relation in relations.ToArray())
+{
+    Console.WriteLine($"* {relation.Label}: {relation.Value}");
+}</code></pre>
+
+<p>
+    In this case the result printed out to the <em>Console</em> window would look like as shown here.
+</p>
+
+<pre style="background-color: black; color: lightgray;"><code>text 111 text John Doe text 333.33
+* index: 111
+* user: John Doe
+* price: 333.33</code></pre>
+
+
+<p style="margin-bottom: 2em;">&nbsp;</p>

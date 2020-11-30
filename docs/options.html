@@ -1,0 +1,92 @@
+
+<h2 id="options">Options</h2>
+
+<p>
+    The <em>Plexdata Template Formatter</em> provides some settings to allow a minimum setup
+    of template formatting. This section wants to give a short overview about these options
+    and their meaning.
+</p>
+
+<p>
+    Class <samp>Options</samp> in namespace <samp>Plexdata.Utilities.Formatting</samp> can be 
+    used to configure the formatting behaviour. An instance of this class is then used together 
+    with a call of one of the overloads of <samp>Template.Format()</samp>. How to do this is 
+    shown in this very short and abstract code snippet.
+</p>
+
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('options-example-1');return false;">Copy</a></div>
+<pre id="options-example-1"><code>Options options = new Options()
+{
+    // ...
+};
+
+Template.Format(options, ...);</code></pre>
+
+<h3>Provider</h3>
+
+<p>
+    Property <samp>Provider</samp> is used to perform value formatting according to additional format
+    instructions. It can be changed by users into any class derived from <samp>IFormatProvider</samp>.
+    No provider&ndash;specific formatting is performed if this property is set to <samp>null</samp>.
+    Its default value is set to <samp>CultureInfo.InvariantCulture</samp>.
+</p>
+
+<h3>Serializer</h3>
+
+<p>
+    Property <samp>Serializer</samp> allows users to apply a custom&ndash;specific serializer for
+    complex data types. Its default value is set to <samp>null</samp>.
+</p>
+<p>
+    Such a custom class must be derived from interface <samp>IArgumentSerializer</samp> in namespace
+    <samp>Plexdata.Utilities.Formatting.Interfaces</samp>. As well, such a class must be able to
+    serialize every custom&ndash;specific data type. Furthermore, this serializer
+    is not used for build&ndash;in system types. An internal fallback serializer is used if no other
+    argument serializer has been applied.
+</p>
+
+<h3>Maximum</h3>
+
+<p>
+    Property <samp>Maximum</samp> allows users to apply a limitation of the maximum result length. Its
+    default value is set to <samp>Int32.MaxValue</samp>. Please keep in mind, any value less than one
+    or greater than <samp>Int32.MaxValue-1</samp> is treated as &ldquo;unlimited&rdquo;. More
+    information about using this property can be found in the examples.
+</p>
+
+<h3>IsLimited</h3>
+
+<p>
+    Property <samp>IsLimited</samp> is nothing else but a convenient getter to determine whether result
+    length limitation is applied or not. It returns <samp>true</samp> if the <samp>Maximum</samp> is set to a range of <samp>1</samp>
+    up to <samp>Int32.MaxValue-1</samp>. Otherwise <samp>false</samp> is returned.
+</p>
+
+<h3>Fallback</h3>
+
+<p>
+    Property <samp>Fallback</samp> allows to define a custom&ndash;specific name to be used as alternative
+    label for unresolved arguments. Its default value is set to <samp>null</samp>. This causes the formatter
+    to show the whole formatting string for each argument that could not be resolved. Otherwise the value
+    of this property is shown. More information about using this property can be found in the examples.
+</p>
+
+<h3>IsFallback</h3>
+
+<p>
+    Property <samp>IsFallback</samp> is nothing else but a convenient getter to determine whether the value
+    of property <samp>Fallback</samp> should be used or not. It returns <samp>false</samp> if the value of
+    property <samp>Fallback</samp> is <samp>null</samp>. Otherwise <samp>true</samp> is returned.
+</p>
+
+<h3>Default</h3>
+
+<p>
+    Class <samp>Options</samp> provides a public field named <samp>Default</samp> to obtain the standard
+    settings. The value of this field is used if no other settings are provided and uses all of the default
+    values as shown above.
+</p>
+
+
+<p style="margin-bottom: 2em;">&nbsp;</p>

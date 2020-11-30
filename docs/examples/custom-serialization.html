@@ -1,0 +1,191 @@
+﻿
+<h2 id="examples-custom-serialization">Custom Serialization</h2>
+
+<p>
+    This section provides some examples of performing a serialization of custom types.
+</p>
+
+<h3 id="examples-custom-serialization-type-1">Implementing Interface <samp>IArgumentSerializer</samp></h3>
+
+<p>
+    Custom serialization is possible in different ways, but might be a bit tricky. As well,
+    custom serialization depends on some pre&ndash;conditions that are listed below.
+</p>
+
+<ul>
+    <li>
+        First of all, serialization takes place only together with the operator <samp>'@'</samp>.
+    </li>
+    <li>
+        Secondly, a custom serialization is only supported for custom types, such as for
+        user defined classes.
+    </li>
+    <li>
+        Thirdly, users have to implement the interface <samp>IArgumentSerializer</samp>, which
+        is able to perform this serialization at all.
+    </li>
+    <li>
+        Finally, the custom serializer must be able to serialize every custom object.
+    </li>
+</ul>
+
+<p>
+    Beforehand, let&rsquo;s create a model class that represents the custom type to be serialized.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('custom-serialization-example-1');return false;">Copy</a></div>
+<pre id="custom-serialization-example-1"><code>public class Employee
+{
+    public Int32 Id { get; set; }
+    public String Firstname { get; set; }
+    public String Surname { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public Employee Manager { get; set; }
+}</code></pre>
+
+<p>
+    Now let&rsquo;s create the <em>Custom Serializer</em>.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('custom-serialization-example-2');return false;">Copy</a></div>
+<pre id="custom-serialization-example-2"><code>public class CustomSerializer : IArgumentSerializer
+{
+    public Int32 Recursions { get; } = 0;
+
+    public String Serialize(IFormatProvider provider, String format, String lining, Object argument)
+    {
+        // For example, serialization handling by Newtonsoft's JSON converter.
+        // return Newtonsoft.Json.JsonConvert.SerializeObject(argument);
+        return "[custom serialization result]";
+    }
+}</code></pre>
+
+<p>
+    Ready to perform custom serialization.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('custom-serialization-example-3');return false;">Copy</a></div>
+<pre id="custom-serialization-example-3"><code>Employee employee = new Employee()
+{
+    Id = 42,
+    Firstname = "John",
+    Surname = "Doe",
+    DateOfBirth = new DateTime(1999, 10, 29),
+    Manager = new Employee()
+    {
+        Id = 23,
+        Firstname = "Jane",
+        Surname = "Doe",
+        DateOfBirth = new DateTime(1999, 5, 23),
+    }
+};
+
+Template.Format(new CustomSerializer(), "Employee of the day {@employee}", employee);</code></pre>
+
+<p>
+    The result would look like <samp>"Employee of the day [custom serialization result]"</samp>.
+</p>
+
+<p>
+    Alternatively, the build&ndash;in serializer can be used instead of implementing an own serializer.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('custom-serialization-example-4');return false;">Copy</a></div>
+<pre id="custom-serialization-example-4"><code>Template.Format("Employee of the day {@employee}", employee);</code></pre>
+
+<p>
+    The result would look like <samp>"Employee of the day [Id: 42; Firstname: "John"; Surname: "Doe"; DateOfBirth: 10/29/1999 12:00:00 AM]"</samp>.
+</p>
+
+<p>
+    Please note, the build&ndash;in serializer does only process the first level of public get
+    properties.
+</p>
+
+<h3 id="examples-custom-serialization-type-2">Overwriting Method <samp>ToString()</samp></h3>
+
+<p>
+    Another way to perform custom serialization it to overwrite method <samp>ToString()</samp>.
+    But note, in such a case the operator <samp>'@'</samp> must not be used.
+</p>
+
+<p>
+    Let&rsquo;s create another custom model beforehand.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('custom-serialization-example-5');return false;">Copy</a></div>
+<pre id="custom-serialization-example-5"><code>public class Candidate
+{
+    public Int32 Id { get; set; }
+    public String Name { get; set; }
+    public String Level { get; set; }
+
+    public override String ToString()
+    {
+        return $"Id: {Id}, Name {Name}, Level: {Level}";
+    }
+}</code></pre>
+
+<p>
+    Ready to perform custom serialization by using method <samp>ToString()</samp>.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('custom-serialization-example-6');return false;">Copy</a></div>
+<pre id="custom-serialization-example-6"><code>Candidate candidate = new Candidate()
+{
+    Id = 42,
+    Name = "Bill Gates",
+    Level = "unlimited"
+};
+
+Template.Format("Founder of Microsoft {candidate}", candidate);</code></pre>
+
+<p>
+    The result would look like <samp>"Founder of Microsoft Id: 42, Name Bill Gates, Level: unlimited"</samp>
+</p>
+
+<p>
+    The operator <samp>'$'</samp> might be used, but there is no difference between using it and leaving it out, as the next example demonstrates.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('custom-serialization-example-7');return false;">Copy</a></div>
+<pre id="custom-serialization-example-7"><code>Template.Format("Founder of Microsoft {$candidate}", candidate);</code></pre>
+
+<p>
+    The result would look like <samp>"Founder of Microsoft Id: 42, Name Bill Gates, Level: unlimited"</samp>
+</p>
+
+<h3 id="examples-custom-serialization-type-3">Implementing Interface <samp>IFormattable</samp></h3>
+
+<p>
+    Yet another way could be to implement a custom class by using interface <samp>IFormattable</samp>.
+    This is especially useful when formatting instructions are required for custom type serialization.
+    But note, it is necessary to provide a formatting instruction to take advantage of this useful feature.
+</p>
+
+<p>
+    Let&rsquo;s derive a class from <samp>IFormattable</samp>.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('custom-serialization-example-8');return false;">Copy</a></div>
+<pre id="custom-serialization-example-8"><code>public class Formattable : IFormattable
+{
+    public String ToString(String format, IFormatProvider provider)
+    {
+        return $"[{nameof(Formattable)}: Format: {format}]";
+    }
+}</code></pre>
+
+<p>
+    Ready to use the custom formattable class.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('custom-serialization-example-9');return false;">Copy</a></div>
+<pre id="custom-serialization-example-9"><code>Template.Format("Formatted value {label:user defined formatting instruction}", new Formattable());</code></pre>
+
+<p>
+    The result would look like <samp>"Formatted value [Formattable: Format: user defined formatting instruction]"</samp>.
+</p>
+
+
+<p style="margin-bottom: 2em;">&nbsp;</p>

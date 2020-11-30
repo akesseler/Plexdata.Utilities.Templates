@@ -1,0 +1,39 @@
+﻿
+<h2 id="examples-exception-handling">Exception Handling</h2>
+
+<p>
+    By design, the <em>Plexdata Template Formatter</em> does not handle exceptions internally,
+    except for value formatting. Hence, the implementation checks and validates each of its
+    input parameters so that an unexpected exception becomes unlikely to occur. But there is
+    no guarantee that exceptions will never be thrown.
+</p>
+
+<p>
+    Sometimes value formatting may fail and usually ends up in an exception. As mentioned above,
+    the template formatter is designed to suppress exceptions as often as possible. But exceptions
+    that occur during value formatting are caught and will be put into the output, instead of
+    re&ndash;throwing them. Here an example.
+</p>
+
+<p>
+    The code snippet below uses a wrong date format which in turn causes a format exception.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('exception-handling-example-1');return false;">Copy</a></div>
+<pre id="exception-handling-example-1"><code>Decimal price = 123456.789M;
+DateTime date = DateTime.Parse("2020-10-29T23:05:17.123");
+
+Template.Format("Price: {price:C2} Date {date:K}", price, date);</code></pre>
+
+<p>
+    Instead of re&ndash;throwing the format exception, the result would look like
+    <samp>"Price: $123,456.79 Date [{date:K} => FormatException: "Input string was not in a correct format."]"</samp>.
+</p>
+
+<p>
+    Keep in mind, this behaviour also includes exceptions that might be thrown in any implementation
+    of interface <samp>IArgumentSerializer</samp>.
+</p>
+
+
+<p style="margin-bottom: 2em;">&nbsp;</p>

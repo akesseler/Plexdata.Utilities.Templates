@@ -1,0 +1,23 @@
+﻿
+<h2 id="examples-mixed-formatting">Mixed Formatting</h2>
+
+<p>
+    A mixture of index&ndash;based and label&ndash;based formattings is not a really good idea
+    and should be avoided if possible. But the <em>Message Temple Capturing Rules</em> state that
+    left&ndash;to&ndash;right capturing has to be performed as soon as one of the format instructions
+    includes a non&ndash;numeric property name. This is exactly what the <em>Plexdata Template Formatter</em>
+    does.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('mixed-formatting-example-1');return false;">Copy</a></div>
+<pre id="mixed-formatting-example-1"><code>Template.Format("text {1} text {ValA} text {2}", 111, "ABC", 333.33);</code></pre>
+
+<p>
+    The result would look like <samp>"text 111 text ABC text 333.33"</samp>. Once again, the order of
+    argument processing is always left&ndash;to&ndash;right, as soon as at least one of the formatting
+    instructions is of type <em>label</em>. More details about <em>Capturing Rules</em> can be found
+    on the Internet under <a href="https://messagetemplates.org#capturing-rules" target="_blank">https://messagetemplates.org#capturing-rules</a>.
+</p>
+
+
+<p style="margin-bottom: 2em;">&nbsp;</p>

@@ -1,0 +1,48 @@
+﻿
+<h2 id="examples-length-truncation">Length Truncation</h2>
+
+<p>
+    The limitation of the length of result strings is only possible by using an instance of
+    class <samp>Options</samp>.
+</p>
+
+<p>
+    The following example shows how to limit the result length to let&rsquo;s say 30 characters.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('length-truncation-example-1');return false;">Copy</a></div>
+<pre id="length-truncation-example-1"><code>Options options = new Options() { Maximum = 30 };
+
+Template.Format(options, "formatted string with a long length");</code></pre>
+
+<p>
+    The result would look like <samp>"formatted string with a lon..."</samp>. It has been
+    truncated and three dots were appended. Note that length truncation takes place for the
+    whole result. This includes the three dots as well.
+</p>
+
+<p>
+    Against this background, this behaviour implies some side effects that come into view
+    near the lower limit. See next example for what is meant in detail.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('length-truncation-example-2');return false;">Copy</a></div>
+<pre id="length-truncation-example-2"><code>Options options = new Options();
+
+options.Maximum = 1;
+result = Template.Format(options, "formatted string with a long length"); // => "f"
+
+options.Maximum = 2;
+result = Template.Format(options, "formatted string with a long length"); // => "fo"
+
+options.Maximum = 3;
+result = Template.Format(options, "formatted string with a long length"); // => "for"
+
+options.Maximum = 4;
+result = Template.Format(options, "formatted string with a long length"); // => "f..."
+
+options.Maximum = 5;
+result = Template.Format(options, "formatted string with a long length"); // => "fo..."</code></pre>
+
+
+<p style="margin-bottom: 2em;">&nbsp;</p>

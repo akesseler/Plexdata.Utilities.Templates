@@ -1,0 +1,36 @@
+﻿
+<h2 id="examples-fallback-usage">Fallback Usage</h2>
+
+<p>
+    As already mentioned, missing arguments are usually replaced by their &ldquo;Marker&rdquo;,
+    which is the complete formatting instruction. Following example shows what is meant in detail.
+</p>
+
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('fallback-usage-example-1');return false;">Copy</a></div>
+<pre id="fallback-usage-example-1"><code>Options options = new Options();
+
+Template.Format(options, "formatted string with \"{value,10:N3}\" data");</code></pre>
+
+<p>
+    The result would look like <samp>"formatted string with "{value,10:N3}" data"</samp>.
+</p>
+
+<p>
+    But sometimes it might be useful to have some kind of default string replacement, for example
+    something like  &ldquo;unused&rdquo;. Therefore, it is possible to customize the formatter by
+    providing a value for the <em>Fallback</em>. See example below how to achieve something like
+    that.
+</p>
+
+<div class="copy-code-snippet-text"><a href="#" onclick="copyToClipboard('fallback-usage-example-2');return false;">Copy</a></div>
+<pre id="fallback-usage-example-2"><code>Options options = new Options() { Fallback = "unused" };
+
+Template.Format(options, "formatted string with \"{value,10:N3}\" data");</code></pre>
+
+<p>
+    With the same format instruction, now the result would look like <samp>"formatted string with "unused" data"</samp>.
+</p>
+
+
+<p style="margin-bottom: 2em;">&nbsp;</p>
