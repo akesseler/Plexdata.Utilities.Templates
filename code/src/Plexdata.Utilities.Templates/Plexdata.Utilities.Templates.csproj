@@ -5,22 +5,39 @@
     <RootNamespace>Plexdata.Utilities.Formatting</RootNamespace>
     <Authors>plexdata.de</Authors>
     <Copyright>Copyright © 2020 - plexdata.de</Copyright>
+    <Description>This library represents an alternative to 'String.Format()', but with template support.</Description>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <FileVersion>1.0.0</FileVersion>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageTags>template message format formatting string arguments utilities</PackageTags>
+    <PackageReleaseNotes>See project history under https://github.com/akesseler/Plexdata.Utilities.Templates/blob/master/code/src/HISTORY.md</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/akesseler/Plexdata.Utilities.Templates</PackageProjectUrl>
+    <Company>plexdata.de</Company>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>.\bin\Debug\netstandard2.0\Plexdata.Utilities.Templates.xml</DocumentationFile>
-    <OutputPath></OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath></OutputPath>
     <DocumentationFile>.\bin\Release\netstandard2.0\Plexdata.Utilities.Templates.xml</DocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="..\..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="&quot;$(SolutionDir)post-build.cmd&quot; &quot;$(SolutionDir)..\hlp\&quot; $(ConfigurationName) &quot;$(SolutionDir)..\hlp\help\*.chm&quot; $(TargetDir)" />
+    <Exec Command="&quot;$(SolutionDir)post-build.cmd&quot; &quot;$(SolutionDir)..\hlp\&quot; $(ConfigurationName) &quot;$(SolutionDir)..\hlp\help\*.chm&quot; &quot;$(TargetDir)&quot;" />
   </Target>
 
 </Project>
